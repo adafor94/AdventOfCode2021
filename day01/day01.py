@@ -1,19 +1,11 @@
 import fileinput
 
-numbers = open("input.in", "r").read().strip().split('\n')
-numbers = [int(x) for x in numbers]
-
-increases1 = increases2 = 0
-last1 = last2 = numbers[0]
+numbers = [int(x) for x in open("input.in", "r").read().strip().split('\n')]
+part1 = part2 = 0
 
 for i in range(1, len(numbers)):
-  if numbers[i] > last1:
-    increases1 += 1
-  if i >= 3:
-    if numbers[i] > last2:
-      increases2 += 1
-    last2 = numbers[i-2]
-  last1 = numbers[i]
+  part1 += numbers[i] > numbers[i-1]
+  part2 += i > 2 and numbers[i] > numbers[i-3]
 
-print("Part1:", increases1)
-print("Part2:", increases2)
+print("Part1:", part1)
+print("Part2:", part2)
